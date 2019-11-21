@@ -1,19 +1,25 @@
 .startStop {
     height: 50px;
     width: 70%;
-    background-color: #555;
+    background-color: green;
+    margin-left:10px;
+    margin-top:5px;
 }
 
 .activateButton {
     height: 50px;
     width: 70%;
-    background-color: #999;
+    margin-left:10px;
+    margin-top:5px;
+    background-color: lightgray;
 }
 
 .endButton {
-    height: 100px;
+    height: 70px;
     width: 70%;
-    background-color: red;
+    margin-left:10px;
+    margin-top:5px;
+    background-color: yellow;
 }
 #controls{
     width: 25%
