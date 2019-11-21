@@ -10,6 +10,11 @@
     background-color: #999;
 }
 
+.endButton {
+    height: 100px;
+    width: 70%;
+    background-color: red;
+}
 #controls{
     width: 25%
 }
