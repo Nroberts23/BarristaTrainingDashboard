@@ -1,0 +1,15 @@
+.startStop {
+    height: 50px;
+    width: 70%;
+    background-color: #555;
+}
+
+.activateButton {
+    height: 50px;
+    width: 70%;
+    background-color: #999;
+}
+
+#controls{
+    width: 25%
+}
