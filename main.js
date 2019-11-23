@@ -25,27 +25,27 @@ var timeline = [];
 
 document.getElementById('drip').addEventListener('click', function(){
     var now = new Date().getTime();
-    drinkQueue.push([1, now]);
+    drinkQueue.push([now, 1]);
     updateWeight();
     updateTimeline();
 });
 
 document.getElementById('short').addEventListener('click', function(){
     var now = new Date().getTime();
-    drinkQueue.push([2, now]);   
+    drinkQueue.push([now, 2]);   
     updateWeight();
     updateTimeline();
 });
 
 document.getElementById('long').addEventListener('click', function(){
     var now = new Date().getTime();
-    drinkQueue.push([3, now]);   
+    drinkQueue.push([now, 3]);   
     updateWeight();
     updateTimeline();
 });
 
 document.getElementById('out').addEventListener('click', function(){
-    var out = drinkQueue.shift()[0];
+    var out = drinkQueue.shift()[1];
     totalWeight = totalWeight - out;
     updateTimeline();
     updateWeightText();
@@ -54,7 +54,7 @@ document.getElementById('out').addEventListener('click', function(){
 function updateWeight(){
     var tot = 0;
     drinkQueue.forEach(function(obj){
-       tot = tot + obj[0]; 
+       tot = tot + obj[1]; 
     });
     totalWeight = tot;
     updateWeightText();
@@ -62,7 +62,7 @@ function updateWeight(){
 
 function updateTimeline(){
     var now = new Date().getTime();
-    timeline.push([totalWeight, now]);
+    timeline.push([now, totalWeight]);
 }
 
 function updateWeightText(){
@@ -72,5 +72,23 @@ function updateWeightText(){
 function generateGraphs(){
     alert('heres where I would do graph things');
     document.getElementById('here').innerHTML = timeline;
+    
 
+    Highcharts.chart('weights',{
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Weight'
+        },
+        xAxis: {
+            type: 'dateTime',
+            crosshair: true
+        },
+        series: [{
+            name: 'barWeight',
+            step: true,
+            data: timeline
+        }]
+    });
 }
