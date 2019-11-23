@@ -1,51 +1,53 @@
 var onBar = '';
 var working = false;
-var startTime;
-var endTime;
 
 document.getElementById('startStop').addEventListener("click", function(){ 
     if (!working){
         working = true;
+        timeline=[];
         onBar= prompt("Who's on bar?");
         document.getElementById('pageTitle').innerHTML = onBar + "'s Performance Assessment"; 
         document.getElementById('startStop').innerHTML = 'Stop test';
-        startTime = new Date().getTime();
+        updateTimeline();
     } else{
         document.getElementById('startStop').innerHTML = 'Stop test';
         working = false;
-        endTime = new Date().getTime();
+        updateTimeline();
         generateGraphs();
     }
 });
 
 var drinks_completed = {};
-var totalWeight = 0
+var totalWeight = 0;
 var drinkQueue = [];
-
+var timeline = [];
 
 
 document.getElementById('drip').addEventListener('click', function(){
     var now = new Date().getTime();
     drinkQueue.push([1, now]);
     updateWeight();
+    updateTimeline();
 });
 
 document.getElementById('short').addEventListener('click', function(){
     var now = new Date().getTime();
     drinkQueue.push([2, now]);   
     updateWeight();
+    updateTimeline();
 });
 
 document.getElementById('long').addEventListener('click', function(){
     var now = new Date().getTime();
     drinkQueue.push([3, now]);   
     updateWeight();
+    updateTimeline();
 });
 
 document.getElementById('out').addEventListener('click', function(){
-    var out = drinkQueue[0][0];
-    drinkQueue = drinkQueue.splice(1);
+    var out = drinkQueue.shift()[0];
     totalWeight = totalWeight - out;
+    updateTimeline();
     updateWeightText();
 });
 
@@ -58,12 +60,17 @@ function updateWeight(){
     updateWeightText();
 }
 
+function updateTimeline(){
+    var now = new Date().getTime();
+    timeline.push([totalWeight, now]);
+}
+
 function updateWeightText(){
     document.getElementById('here').innerHTML = 'TotalWeight: ' + totalWeight;
 }
 
 function generateGraphs(){
-    document.getElementById('here').innerHTML = '';
     alert('heres where I would do graph things');
+    document.getElementById('here').innerHTML = timeline;
 
 }
