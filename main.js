@@ -1,8 +1,21 @@
 var onBar = '';
+var working = false;
+var startTime;
+var endTime;
 
 document.getElementById('startStop').addEventListener("click", function(){ 
-    onBar= prompt("Who's on bar?");
-    document.getElementById('pageTitle').innerHTML = onBar + "'s Performance Assessment";    
+    if (!working){
+        working = true;
+        onBar= prompt("Who's on bar?");
+        document.getElementById('pageTitle').innerHTML = onBar + "'s Performance Assessment"; 
+        document.getElementById('startStop').innerHTML = 'Stop test';
+        startTime = new Date().getTime();
+    } else{
+        document.getElementById('startStop').innerHTML = 'Stop test';
+        working = false;
+        endTime = new Date().getTime();
+        generateGraphs();
+    }
 });
 
 var drinks_completed = {};
@@ -47,4 +60,10 @@ function updateWeight(){
 
 function updateWeightText(){
     document.getElementById('here').innerHTML = 'TotalWeight: ' + totalWeight;
+}
+
+function generateGraphs(){
+    document.getElementById('here').innerHTML = '';
+    alert('heres where I would do graph things');
+
 }
