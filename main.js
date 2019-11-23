@@ -7,8 +7,12 @@ document.getElementById('startStop').addEventListener("click", function(){
 
 var drinks_completed = {};
 var curDrink = {};
+curDrink['drip'] = [];
 
 document.getElementById('drip').addEventListener('click', function(){
     var now = new Date().getTime();
-    document.getElementById('here').innerHTML = 'Latest click' + now
+    curDrink['drip'].push(now);
+    document.getElementById('here').innerHTML = 'Latest click: ' + curDrink['drip'];
+    console.log(curDrink['drip']);
 });
+
